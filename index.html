@@ -7,29 +7,31 @@
 
   </head>
   <body>
-    <h1></h1>
-      <img src="" id="bookThumb">
+
+  <center> Weather for <span id="city"></span>, <span id="state"></span>
+       <br>
+    <img src="" id="weatherLogo">
+    <p> Forecast:  <span id="weatherForcast"></span>
       <br>
-    Author:<span id="authorName"></span>
-    <p></p>
-    Description:<p id="description"></p>
-
-  <span id="stuff"></span>
-
+    Currently: <span id="weatherTime"></span> </p>
+  </center>
   <script>
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://www.googleapis.com/books/v1/volumes?q=isbn:0618640150", false);
+    xhr.open("GET", "http://api.wunderground.com/api/ac560606f5212883/forecast/geolookup/conditions/q/OR/Portland.json", false);
     xhr.send();
     console.log(xhr.status); // if this returns 200, then you are in like Flynn
-    var bookObject = JSON.parse(xhr.responseText);
-    console.log(bookObject);
+    var weather = JSON.parse(xhr.responseText);
+    console.log(weather);
 
-    $("title").text(bookObject.items[0].volumeInfo.title);
-    $("h1").text(bookObject.items[0].volumeInfo.title);
-    $("#authorName").text(bookObject.items[0].volumeInfo.authors[0]);
-    $("#description").text(bookObject.items[0].volumeInfo.description);
-    $('#bookThumb').attr("src", bookObject.items[0].volumeInfo.imageLinks.thumbnail);
-    $("#stuff").text(bookObject.items[0].searchInfo.textSnippet);
-  </script>
+      $("#currentTemp").text(weather.current_observation.feelslike_f);
+      $('#city').text(weather.location.city);
+      $('#state').text(weather.location.state);
+      $('#weatherTime').text(weather.current_observation.heat_index_string);
+      $('#weatherForcast').text(weather.forecast.txt_forecast.forecastday[0].fcttext);
+      $('#weatherLogo').attr("src", weather.current_observation.icon_url);
+    </script>
+
+
+
   </body>
 </html>
