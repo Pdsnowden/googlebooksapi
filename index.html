@@ -7,21 +7,29 @@
   <style>
     #player {
       max-width:85%;
+      margin: auto;
+          }
+
+    .container {
+      display: flex;
     }
   </style>
   </head>
   <body>
-
+    <header>
+    <center>  <h1>The Weather Psychic will you the current weather in <b>Portland</b></h1></center>
+    </header>
+  <span class="container"
     <div id="player"></div>
     <br>
-
+</span>
 
   <center> Weather for <span id="city"></span>, <span id="state"></span>
        <br>
     <img src="" id="weatherLogo">
     <p> Forecast:  <span id="weatherForcast"></span>
       <br>
-    Currently: <span id="weatherTime"></span> </p>
+    Currently: <span id="currentTemp"></span> </p>
   </center>
 
 
